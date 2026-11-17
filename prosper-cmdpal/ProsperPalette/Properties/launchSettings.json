@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProsperPalette (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    }
+  }
+}

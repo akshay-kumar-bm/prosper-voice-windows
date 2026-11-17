@@ -1,0 +1,11 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+# Prosper's engine is ported close to verbatim from the .NET Framework app (C# 5); keep style analyzers off there
+# so the diff against upstream stays small.
+[**/Engine/*.cs]
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.CS0649.severity = none

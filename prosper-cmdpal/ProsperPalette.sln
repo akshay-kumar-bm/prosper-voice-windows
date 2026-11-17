@@ -1,0 +1,44 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35507.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProsperPalette", "ProsperPalette\ProsperPalette.csproj", "{BE47438E-2684-4BD0-892B-FD8F5357919F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTests", "tests\EngineTests\EngineTests.csproj", "{5E62F8C5-F930-4317-92DB-E71B7B81AF21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|ARM64.Build.0 = Debug|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|x64.ActiveCfg = Debug|x64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|x64.Build.0 = Debug|x64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Debug|x64.Deploy.0 = Debug|x64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|ARM64.ActiveCfg = Release|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|ARM64.Build.0 = Release|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|ARM64.Deploy.0 = Release|ARM64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|x64.ActiveCfg = Release|x64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|x64.Build.0 = Release|x64
+		{BE47438E-2684-4BD0-892B-FD8F5357919F}.Release|x64.Deploy.0 = Release|x64
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Release|ARM64.Build.0 = Release|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E62F8C5-F930-4317-92DB-E71B7B81AF21}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C72DFEE-EA9A-4FB6-9090-365DB13AE75B}
+	EndGlobalSection
+EndGlobal
