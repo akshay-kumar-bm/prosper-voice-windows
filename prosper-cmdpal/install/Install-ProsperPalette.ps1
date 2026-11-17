@@ -3,7 +3,7 @@
   Installs the Prosper extension for PowerToys Command Palette from the build's .msix and .cer.
 
 .DESCRIPTION
-  Put this script, ProsperPalette-<x64|ARM64>.msix and ProsperPalette.cer in one folder and run:
+  Put this script, ProsperPalette-<x64|ARM64>.msix and ProsperPalette-<x64|ARM64>.cer in one folder and run:
       powershell -ExecutionPolicy Bypass -File .\Install-ProsperPalette.ps1
   The package is signed with a self-signed certificate made for that build. Windows only installs packages it
   trusts, so the certificate's public half goes into the machine's "Trusted People" store first; that one step needs
@@ -20,17 +20,22 @@ param(
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
+$arch = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'ARM64' } else { 'x64' }
 if (-not $Package) {
-    $arch = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'ARM64' } else { 'x64' }
     $Package = Join-Path $here "ProsperPalette-$arch.msix"
     if (-not (Test-Path $Package)) {
         $found = Get-ChildItem $here -Filter 'ProsperPalette*.msix' | Select-Object -First 1
         if ($found) { $Package = $found.FullName }
     }
 }
-if (-not $Certificate) { $Certificate = Join-Path $here 'ProsperPalette.cer' }
-if (-not (Test-Path $Package)) { throw "No ProsperPalette .msix found next to this script." }
-if (-not (Test-Path $Certificate)) { throw "ProsperPalette.cer not found next to this script." }
+if (-not $Package -or -not (Test-Path $Package)) { throw "No ProsperPalette .msix found next to this script." }
+# Each architecture's package is signed with its own certificate: use the one that matches the package.
+if (-not $Certificate) {
+    $pkgArch = if ([IO.Path]::GetFileNameWithoutExtension($Package) -match '-(x64|ARM64)$') { $Matches[1] } else { $arch }
+    $Certificate = Join-Path $here "ProsperPalette-$pkgArch.cer"
+    if (-not (Test-Path $Certificate)) { $Certificate = Join-Path $here 'ProsperPalette.cer' }
+}
+if (-not (Test-Path $Certificate)) { throw "The package's certificate ($([IO.Path]::GetFileName($Certificate))) was not found next to this script." }
 
 # 1. Trust the build's certificate (machine store: administrator, asked once through UAC).
 $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2 $Certificate
