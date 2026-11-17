@@ -128,6 +128,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # One zip per architecture: everything needed to install into PowerToys Command Palette in one download.
+          for arch in x64 ARM64; do
+            (cd dist && zip -j "ProsperPalette-$arch.zip" "ProsperPalette-$arch.msix" "ProsperPalette-$arch.cer" \
+              Install-ProsperPalette.ps1 "ProsperPalette-$arch-SHA256SUMS.txt")
+          done
           ls -l dist
           if ! gh release view "$TAG" > /dev/null 2>&1; then
             # release.yml hasn't created it yet: create it the same way, and release.yml will add the .exe.

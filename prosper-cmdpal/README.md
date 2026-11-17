@@ -38,10 +38,10 @@ turned on, and an OpenAI API key.
 
 ### From a release (no Visual Studio)
 
-1. From the repository's latest [Release](../../releases/latest), download `Install-ProsperPalette.ps1`,
-   `ProsperPalette-x64.msix` and `ProsperPalette-x64.cer` (the `ARM64` pair for ARM laptops) into one folder.
-   Between releases, the same files are in the `ProsperPalette-x64` / `ProsperPalette-ARM64` artifact of any run of
-   the *Prosper Command Palette extension* workflow under **Actions**.
+1. From the repository's latest [Release](../../releases/latest), download **`ProsperPalette-x64.zip`**
+   (`ProsperPalette-ARM64.zip` for ARM laptops) and unzip it: it holds the package, its certificate and the install
+   script. Between releases, the same files are in the `ProsperPalette-x64` / `ProsperPalette-ARM64` artifact of any
+   run of the *Prosper Command Palette extension* workflow under **Actions**.
 2. Run, in that folder:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\Install-ProsperPalette.ps1
