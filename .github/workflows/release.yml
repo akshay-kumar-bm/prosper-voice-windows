@@ -50,5 +50,7 @@ jobs:
           } else {
             $title = "Prosper Voice " + $env:TAG.TrimStart("v")
             gh release create $env:TAG @assets --target $env:GITHUB_SHA --title $title --notes-file .github/release-notes.md --generate-notes
+            # cmdpal.yml (the Command Palette extension) may have created the release in the meantime: add the files to it.
+            if ($LASTEXITCODE -ne 0) { gh release upload $env:TAG @assets --clobber }
           }
           if ($LASTEXITCODE -ne 0) { exit 1 }

@@ -36,18 +36,19 @@ screen") and confirms ("Typed · copied"). At rest it is hidden unless you turn 
 Requirements: Windows 10 2004+ / Windows 11, [PowerToys](https://aka.ms/installpowertoys) with Command Palette
 turned on, and an OpenAI API key.
 
-### From the CI build (no Visual Studio)
+### From a release (no Visual Studio)
 
-1. Open the latest **Prosper Command Palette extension** run under this repository's **Actions** tab (workflow `cmdpal.yml`) and download the
-   `ProsperPalette-x64` artifact (`ProsperPalette-ARM64` for ARM laptops). Unzip it into one folder: it holds
-   `ProsperPalette-x64.msix`, `ProsperPalette.cer`, `Install-ProsperPalette.ps1` and `SHA256SUMS.txt`.
+1. From the repository's latest [Release](../../releases/latest), download `Install-ProsperPalette.ps1`,
+   `ProsperPalette-x64.msix` and `ProsperPalette-x64.cer` (the `ARM64` pair for ARM laptops) into one folder.
+   Between releases, the same files are in the `ProsperPalette-x64` / `ProsperPalette-ARM64` artifact of any run of
+   the *Prosper Command Palette extension* workflow under **Actions**.
 2. Run, in that folder:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\Install-ProsperPalette.ps1
    ```
-   Each CI build is signed with its own self-signed certificate. The script adds that certificate to the machine's
+   Each build is signed with its own self-signed certificate. The script adds that certificate to the machine's
    *Trusted People* store (one UAC prompt: this is the only step that needs administrator rights), then installs the
-   extension for your account.
+   extension for your account, replacing an older version.
 3. Open Command Palette, type **Reload** → *Reload Command Palette extensions*, then **Prosper settings**: paste your
    OpenAI key, add a line *About you*, **Save**, and **Test connection**.
 4. If Windows blocks the microphone: *Settings → Privacy & security → Microphone →* allow desktop apps.
@@ -70,6 +71,12 @@ Command line on Windows (what CI runs):
 msbuild ProsperPalette\ProsperPalette.csproj /restore /p:Configuration=Release /p:Platform=x64 /p:RuntimeIdentifier=win-x64 `
   /p:SelfContained=true /p:GenerateAppxPackageOnBuild=true /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly
 ```
+
+## Releasing
+
+Push a version tag (`git tag v1.2 && git push origin v1.2`). `release.yml` builds `ProsperVoice.exe` and
+`cmdpal.yml` builds the extension; both attach their files to that tag's release (package version 1.2.0.0, so it
+installs as an update).
 
 ## How it's built
 
