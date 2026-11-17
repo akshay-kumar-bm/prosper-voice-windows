@@ -35,6 +35,13 @@ the bar says what it is doing ("Transcribing", "Thinking with your screen"), the
   (OAuth, in your browser) or paste an access token. Tools on your *Always allowed* list run straight away; every
   other tool call asks Allow / Always allow / Cancel first.
 
+## PowerToys Command Palette extension
+
+The same features also come as an extension for [PowerToys Command Palette](https://learn.microsoft.com/windows/powertoys/command-palette/overview)
+(Win+Alt+Space): Dictate and Assistant commands, typed "Ask Prosper" requests, history and settings pages, and a Dock
+band, with the same shortcuts. It lives in [`prosper-cmdpal/`](prosper-cmdpal/README.md) and is built by its own
+workflow; the standalone `.exe` below is unchanged.
+
 ## Set up
 
 1. Put `ProsperVoice.exe` and `install.cmd` in the same folder and double-click `install.cmd`. It installs for you

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap3 rescap">
+
+  <!-- Publisher must match the certificate the package is signed with (see install/Install-ProsperPalette.ps1). -->
+  <Identity
+    Name="ProsperPalette"
+    Publisher="CN=ProsperPalette"
+    Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>Prosper for Command Palette</DisplayName>
+    <PublisherDisplayName>Prosper</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.19041.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="Prosper for Command Palette"
+        Description="Prosper voice dictation and Assistant inside PowerToys Command Palette"
+        BackgroundColor="transparent"
+        AppListEntry="none"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="ProsperPalette.exe" Arguments="-RegisterProcessAsComServer" DisplayName="Prosper">
+              <com:Class Id="138DF00F-BC92-457E-B75A-774F7C38D6BC" DisplayName="Prosper" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="com.microsoft.commandpalette"
+            Id="ProsperPalette"
+            PublicFolder="Public"
+            DisplayName="Prosper"
+            Description="Voice dictation, spoken edits and an AI Assistant (OpenAI, optional MCP tools)">
+            <uap3:Properties>
+              <CmdPalProvider>
+                <Activation>
+                  <CreateInstance ClassId="138DF00F-BC92-457E-B75A-774F7C38D6BC" />
+                </Activation>
+                <SupportedInterfaces>
+                  <Commands/>
+                </SupportedInterfaces>
+              </CmdPalProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <!-- MCP sign-in: the browser returns to http://127.0.0.1:47823/callback -->
+    <Capability Name="privateNetworkClientServer" />
+    <rescap:Capability Name="runFullTrust" />
+    <!-- Device capabilities must come last (manifest schema order). -->
+    <DeviceCapability Name="microphone" />
+  </Capabilities>
+</Package>
